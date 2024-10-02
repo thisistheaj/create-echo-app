@@ -1,0 +1,5 @@
+.env
+public/assets/*
+/files/*
+/bin/
+/obj/

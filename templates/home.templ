@@ -1,0 +1,35 @@
+package templates
+
+import (
+	"strconv"
+
+	"your_project_name/types"
+)
+
+templ Home(recentPosts []types.Post, isAuth bool) {
+    @Layout("Home") {
+        if isAuth {
+            @AuthedNavbar()
+        } else {
+            @UnauthedNavbar()
+        }
+        <div class="max-w-5xl mx-auto px-4 py-8">
+            <div class="bg-white rounded-lg p-6">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-800">Recent Posts</h2>
+                if len(recentPosts) > 0 {
+                    <ul class="space-y-4">
+                        for _, post := range recentPosts {
+                            <li class="border-b pb-4">
+                                <h3 class="text-xl font-semibold text-slate-800"><a href={templ.SafeURL("/posts/" + strconv.Itoa(int(post.ID)))} class="hover:underline">{post.Title}</a></h3>
+                                <p class="text-gray-600 mt-2">{post.Body[:min(100, len(post.Body))]}...</p>
+                                <a href={templ.SafeURL("/posts/" + strconv.Itoa(int(post.ID)))} class="text-slate-800 hover:underline mt-2 inline-block">Read more</a>
+                            </li>
+                        }
+                    </ul>
+                } else {
+                    <p class="text-gray-600">No recent posts available.</p>
+                }
+            </div>
+        </div>
+    }
+}

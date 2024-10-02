@@ -1,0 +1,18 @@
+package templates
+
+templ Layout(title string) {
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+            <title>{title}</title>
+            <script src="https://cdn.tailwindcss.com"></script>
+            // Add any other common stylesheets or scripts here
+        </head>
+        <body class="min-h-screen text-gray-900 flex flex-col">
+            <main class="w-full flex-grow">
+                {children...}
+            </main>
+        </body>
+    </html>
+}
